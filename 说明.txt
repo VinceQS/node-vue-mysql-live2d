@@ -1,0 +1,20 @@
+启动vue项目，
+在server文件夹下执行 node index 启动node服务
+
+添加live2d二次元看板，参考 https://blog.csdn.net/Jioho_chen/article/details/89419170
+修改index.html ，引入js, 添加模板文件live2dw,在App.vue中初始化
+
+setTimeout(() => {
+  window.L2Dwidget.init({
+    "pluginRootPath":"static/live2dw/",
+    "pluginJsPath":"lib/",
+    "pluginModelPath":"assets/",
+    "tagMode":false,
+    "debug":false,
+    "model":{"jsonPath":"/static/live2dw/live2d-widget-model-shizuku/assets/shizuku.model.json"},
+    "display":{"position":"right","width":150,"height":300},
+    "mobile":{"show":true},
+    "log":false
+  })
+}, 1000)
+修改model的指向和文件名，可切换不同的动画

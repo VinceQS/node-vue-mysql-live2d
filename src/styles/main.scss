@@ -1,0 +1,21 @@
+@import './basic.scss';
+
+body, html {
+  margin: 0;
+  padding: 0
+}
+.login-container {
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://www4.bing.com/az/hprichbg/rb/Kamchatka_ZH-CN8647931935_1920x1080.jpg");
+}
+.svg-icon {
+  width: 1.2em !important;
+  height: 1.2em !important;
+}
+.clearfix {
+  overflow: hidden;
+  _zoom: 1;
+}

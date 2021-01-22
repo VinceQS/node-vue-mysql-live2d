@@ -1,0 +1,81 @@
+$link-blue: blue;
+$border: border 1px solid #ccc;
+$size: 14px;
+// 混合器 使用@mixin标识符定义， 给这个标识符赋予一个名字，然后就可以被引用 @include (相当于是抽取的公共样式)
+@mixin rounded-corners{
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+// 引用
+notice {
+    background: #ccc;
+    border: 1px solid #111;
+    @include rounded-corners;
+}
+// 混合器不仅可以包含属性，也可以包含css规则，
+@mixin no-bullets{
+    list-style: none;
+    li{
+        list-style-image: none;
+        list-style-type: none;
+        margin-left: 0px;
+    }
+}
+// 当一个包含css规则的混合器通过@include包含在一个父规则中时 ，在混合器中的规则最终会生成父规则中的嵌套规则
+// 混合器传参， 可以通过在@include混合器时给混合器传参，来定制混合器生成的精确样式。
+@mixin link-colors($normal, $hover, $visited){
+    color: $normal;
+    &:hover{color: $hobver}
+    &:visited{color: $visited}
+}
+a{
+    @include link-colors(blue, red, green);
+}
+// 最终生成
+a { color: blue}
+a:hover{ color: red}
+a:visited{ color: green}
+// 默认参数
+@mixin links($normal, $hover:$normal, $visited:$normal){
+    color: $normal;
+    &:hover{ color: $hover }
+    &:visited{ color: $visited }
+}
+// 样式继承 @extend @extend
+.error{
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+.seriousError{
+    @extend .error;
+    border-width: 3px;
+}
+// .serousError 会继承样式表中任何位置处为.error定义的所有样式，所以class="seriouseError" 修饰的HTML元素
+// 最终的展示效果就好像是class="seriousError error"
+// 继承还会扩展到，所继承样式包含的组合选择器的样式
+#main {
+    color: #f44;
+    a{
+        font-size: 12px;
+        &:hover{
+            color: red;
+        }
+    }
+}
+#main{
+    color: #f44;
+}
+#main a{ font-size: 12px}
+#main a:hover{ color: red}
+// font-family, font-size, font-weight, 都以font开头，可以将属性嵌套在命名空间内
+.funky{
+    font: {
+        family: fantasy;
+        size: 20px;
+        weight: bold;
+    }
+}
+
+
+
